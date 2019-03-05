@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Borgar Bordoy
  */
-public class Heapsort implements PQ {
+public class Heapsort {
 
     public static void main(String[] args) {
         PQ pq = (PQ) new PQHeap(1000);
@@ -26,16 +26,6 @@ public class Heapsort implements PQ {
             n--;
         }
 
-    }
-
-    @Override
-    public Element extractMin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void insert(Element e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
