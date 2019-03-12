@@ -26,5 +26,4 @@ public class Element {
     public Object getData() {
         return this.data;
     }
-
 }
