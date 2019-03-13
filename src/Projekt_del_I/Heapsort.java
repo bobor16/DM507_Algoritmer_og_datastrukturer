@@ -21,7 +21,6 @@ public class Heapsort {
             pq.insert(new Element(sc.nextInt(), null));
             n++;
         }
-        sc.close();
         while (n > 0) {
             System.out.println(pq.extractMin().getKey());
             n--;
