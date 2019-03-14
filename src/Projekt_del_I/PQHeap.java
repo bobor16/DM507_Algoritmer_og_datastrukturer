@@ -20,15 +20,15 @@ public class PQHeap implements PQ {
         this.list.add(null);
 
     }
-
+    // Calculates index of parent
     public int parent(int i) {
         return (i / 2);
     }
-
+    // Calculates index of parents left child
     public int left(int i) {
         return (i * 2);
     }
-
+    // Calculates index of parents right child
     public int right(int i) {
         return ((i * 2) + 1);
     }
@@ -37,38 +37,18 @@ public class PQHeap implements PQ {
         return list.get(1);
     }
 
+    // Extracts first element in queue
     @Override
     public Element extractMin() {
         Element min = minimum();
         list.set(1, list.get(list.size() - 1));
         list.remove(list.size() - 1);
         minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
-        minHeapify(1);
+        minHeapify(1);   
         return min;
     }
 
+     
     @Override
     public void insert(Element e) {
         list.add(e);
