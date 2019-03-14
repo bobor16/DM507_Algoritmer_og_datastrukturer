@@ -43,6 +43,29 @@ public class PQHeap implements PQ {
         list.set(1, list.get(list.size() - 1));
         list.remove(list.size() - 1);
         minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
+        minHeapify(1);
         return min;
     }
 
@@ -58,13 +81,13 @@ public class PQHeap implements PQ {
             i = parent(i);
         }
     }
-
+    // Swaps the parent with the smallest child
     public void swapper(int i, int parent) {
         Element temp = list.get(parent);
         list.set(parent, list.get(i));
         list.set(i, temp);
     }
-
+    
     public void minHeapify(int i) {
         int l = left(i);
         int r = right(i);
@@ -78,6 +101,7 @@ public class PQHeap implements PQ {
         if (r <= list.size() - 1 && list.get(r).getKey() < list.get(i).getKey()) {
             min = r;
         }
+        // Checks if parent is not the smallest
         if (min != i) {
             swapper(i, min);
             minHeapify(min);
