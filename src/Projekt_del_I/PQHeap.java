@@ -33,6 +33,8 @@ public class PQHeap implements PQ {
         list.set(fpos, temp);
     }
 
+    // Minimum heapifies the ArrayList. Finds the smallest key of a parent and the children's keys.
+    // If the smallest is not the parents key, the smallest child is swapped with its parent.
     private void minHeapify(int i) {
         int left = left(i);
         int right = right(i);
