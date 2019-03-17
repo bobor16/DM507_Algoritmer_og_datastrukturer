@@ -1,40 +1,42 @@
 package Projekt_del_I;
 
+//Imports ArrayLsit from java.util
 import java.util.ArrayList;
 
 /**
  *
- * @author Borgar Bordoy
+ * @author Borgar Bordoy - bobor16@student.sdu.dk
+ * @author Martin Lykke - mlykk17@student.sdu.dk
+ * @author Rasmus Hansen - raha817@student.sdu.dk
  */
+
 public class PQHeap implements PQ {
-
+    //Instanciates ArrayList of type Element and names it list.
     private ArrayList<Element> list;
-
+    
+    //Constructor
     public PQHeap(int maxElms) {
+        //Sets ArrayList to list and defines size.
         this.list = new ArrayList<>(maxElms + 1);
+        
+        //Adds null to the first index of the list.
         this.list.add(null);
     }
-    // Calculates the index of the parent
+    // Calculates the index of the parent.
     private int parent(int i) {
-        return i / 2;
+        return (i / 2);
     }
-    // Calculates the index of the parents left child
+    // Calculates the index of the parents left child.
     private int left(int i) {
         return (2 * i);
     }
-    // Calculates the index of the parents right child
+    // Calculates the index of the parents right child.
     private int right(int i) {
         return (2 * i) + 1;
     }
 
-    private void swap(int fpos, int spos) {
-        Element temp = list.get(spos);
-        list.set(spos, list.get(fpos));
-        list.set(fpos, temp);
-    }
-
     // Minimum heapifies the ArrayList. Finds the smallest key of a parent and the children's keys.
-    // If the smallest is not the parents key, the smallest child is swapped with its parent.
+    // If the smallest is not the parent key, the smallest child is exchanged with its parent.
     private void minHeapify(int i) {
         int left = left(i);
         int right = right(i);
@@ -56,10 +58,9 @@ public class PQHeap implements PQ {
         // This if statement swaps the parent with the smallest child.
         // If the new parent is not the smallest, it makes a recursive call.
         if (min != i) {
-            swap(min, i);
-//            Element temp = list.get(i);
-//            list.set(i, list.get(smallest));
-//            list.set(smallest, temp);
+            Element temp = list.get(i);
+            list.set(i, list.get(min));
+            list.set(min, temp);
             minHeapify(min);
         }
     }
@@ -68,8 +69,8 @@ public class PQHeap implements PQ {
         return list.get(1);
     }
 
-    // Extracts first element in queue and moves the last element to be the first one
-    // Lastly the heapify method is called which min-heapifies the ArrayList and min(minimum) is returned
+    // Extracts first element in queue and moves the last element to be the first one.
+    // Lastly the heapify method is called which min-heapifies the ArrayList and min(minimum) is returned.
     @Override
     public Element extractMin() {
         Element min = min();
@@ -79,24 +80,16 @@ public class PQHeap implements PQ {
         return min;
     }
 
-
-    // Inserts an element e into the priority-tree whilst also maintains the min-heap tree
     @Override
     public void insert(Element e) {
         list.add(e);
         int i = list.size() - 1;
 
-        // The while loop maintains the heap by switching the element e with its parent,
-        // making e the new parent, from there is compares the next parent to e and if e is smaller
-        // than the new parent it will be switched again, until e has a parent that is smaller or e is at the root.
         while (i > 1 && list.get(parent(i)).getKey() > list.get(i).getKey()) {
-
-//            swap(list.get(parent(i)).getKey(), i);
             Element temp = list.get(i);
             list.set(i, list.get(parent(i)));
             list.set(parent(i), temp);
             i = parent(i);
         }
     }
-
 }
