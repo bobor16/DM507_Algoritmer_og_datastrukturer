@@ -1,14 +1,7 @@
 package Projekt_del_I;
 
-import Projekt_del_I.Element;
-import Projekt_del_I.PQ;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Borgar Bordoy
@@ -35,31 +28,30 @@ public class PQHeap implements PQ {
     }
 
     private void swap(int fpos, int spos) {
-//        Element temp = list.get(spos);
-//        list.set(spos, list.get(fpos));
-//        list.set(fpos, temp);
+        Element temp = list.get(spos);
+        list.set(spos, list.get(fpos));
+        list.set(fpos, temp);
     }
 
-
-    private void heapify(int i) {
+    private void minHeapify(int i) {
         int left = left(i);
         int right = right(i);
-        int smallest;
+        int min;
 
         if (left <= list.size() - 1 && list.get(left).getKey() < list.get(i).getKey()) {
-            smallest = left;
+            min = left;
         } else {
-            smallest = i;
+            min = i;
         }
-        if (right <= list.size() - 1 && list.get(right).getKey() < list.get(smallest).getKey()) {
-            smallest = right;
+        if (right <= list.size() - 1 && list.get(right).getKey() < list.get(min).getKey()) {
+            min = right;
         }
-        if (smallest != i) {
-//            swap(smallest, i);
-            Element temp = list.get(i);
-            list.set(i, list.get(smallest));
-            list.set(smallest, temp);
-            heapify(smallest);
+        if (min != i) {
+            swap(min, i);
+//            Element temp = list.get(i);
+//            list.set(i, list.get(smallest));
+//            list.set(smallest, temp);
+            minHeapify(min);
         }
     }
 
@@ -67,12 +59,14 @@ public class PQHeap implements PQ {
         return list.get(1);
     }
 
+    // Extracts first element in queue and moves the last element to be the first one
+    // Lastly the heapify method is called which min-heapifies the ArrayList and min(minimum) is returned
     @Override
     public Element extractMin() {
         Element min = min();
         list.set(1, list.get(list.size() - 1));
         list.remove(list.size() - 1);
-        heapify(1);
+        minHeapify(1);
         return min;
     }
 
@@ -88,7 +82,7 @@ public class PQHeap implements PQ {
         // than the new parent it will be switched again, until e has a parent that is smaller or e is at the root.
         while (i > 1 && list.get(parent(i)).getKey() > list.get(i).getKey()) {
 
-            // swap(list.get(parent(i)).getKey(), i);
+//            swap(list.get(parent(i)).getKey(), i);
             Element temp = list.get(i);
             list.set(i, list.get(parent(i)));
             list.set(parent(i), temp);
