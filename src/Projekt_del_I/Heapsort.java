@@ -25,7 +25,5 @@ public class Heapsort {
             System.out.println(pq.extractMin().getKey());
             n--;
         }
-
     }
-
 }
