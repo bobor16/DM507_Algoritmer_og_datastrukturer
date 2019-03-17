@@ -9,27 +9,30 @@ import java.util.ArrayList;
  * @author Martin Lykke - mlykk17@student.sdu.dk
  * @author Rasmus Hansen - raha817@student.sdu.dk
  */
-
 public class PQHeap implements PQ {
+
     //Instanciates ArrayList of type Element and names it list.
     private ArrayList<Element> list;
-    
+
     //Constructor
     public PQHeap(int maxElms) {
         //Sets ArrayList to list and defines size.
         this.list = new ArrayList<>(maxElms + 1);
-        
+
         //Adds null to the first index of the list.
         this.list.add(null);
     }
+
     // Calculates the index of the parent.
     private int parent(int i) {
         return (i / 2);
     }
+
     // Calculates the index of the parents left child.
     private int left(int i) {
         return (2 * i);
     }
+
     // Calculates the index of the parents right child.
     private int right(int i) {
         return (2 * i) + 1;
@@ -65,6 +68,7 @@ public class PQHeap implements PQ {
         }
     }
 
+    //Returns the Element on the 1'st index of the list.
     private Element min() {
         return list.get(1);
     }
@@ -79,7 +83,8 @@ public class PQHeap implements PQ {
         minHeapify(1);
         return min;
     }
-
+    
+    //Inserts elements to the list, while managing a heap.
     @Override
     public void insert(Element e) {
         list.add(e);
