@@ -85,11 +85,15 @@ public class PQHeap implements PQ {
     }
     
     //Inserts elements to the list, while managing a heap.
+    // Inserts an element e into the priority-tree whilst also maintains the min-heap tree
     @Override
     public void insert(Element e) {
         list.add(e);
         int i = list.size() - 1;
 
+        // The while loop maintains the heap by switching the element e with its parent,
+        // making e the new parent, from there is compares the next parent to e and if e is smaller
+        // than the new parent it will be switched again, until e has a parent that is smaller or e is at the root.
         while (i > 1 && list.get(parent(i)).getKey() > list.get(i).getKey()) {
             Element temp = list.get(i);
             list.set(i, list.get(parent(i)));
