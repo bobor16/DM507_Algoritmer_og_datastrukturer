@@ -14,15 +14,15 @@ public class PQHeap implements PQ {
         this.list = new ArrayList<>(maxElms + 1);
         this.list.add(null);
     }
-
+    // Calculates the index of the parent
     private int parent(int i) {
         return i / 2;
     }
-
+    // Calculates the index of the parents left child
     private int left(int i) {
         return (2 * i);
     }
-
+    // Calculates the index of the parents right child
     private int right(int i) {
         return (2 * i) + 1;
     }
@@ -40,14 +40,21 @@ public class PQHeap implements PQ {
         int right = right(i);
         int min;
 
+        // The if statement checks if the left child is smaller than its parent,
+        // and assigns the smaller of the two to "min".
         if (left <= list.size() - 1 && list.get(left).getKey() < list.get(i).getKey()) {
             min = left;
         } else {
             min = i;
         }
+        // The if statement checks if the right child is smaller than its parent, if true it will be assigned to "min".
+        // To clarify the right child compares itself with the  parent which can be the former left child or the parent "i",
+        // depending on what the above if statement has done.
         if (right <= list.size() - 1 && list.get(right).getKey() < list.get(min).getKey()) {
             min = right;
         }
+        // This if statement swaps the parent with the smallest child.
+        // If the new parent is not the smallest, it makes a recursive call.
         if (min != i) {
             swap(min, i);
 //            Element temp = list.get(i);
