@@ -1,3 +1,4 @@
+package Projekt_del_I;
 
 import Projekt_del_I.Element;
 import Projekt_del_I.PQ;
@@ -39,6 +40,7 @@ public class PQHeap implements PQ {
 //        list.set(fpos, temp);
     }
 
+
     private void heapify(int i) {
         int left = left(i);
         int right = right(i);
@@ -74,14 +76,19 @@ public class PQHeap implements PQ {
         return min;
     }
 
+
+    // Inserts an element e into the priority-tree whilst also maintains the min-heap tree
     @Override
     public void insert(Element e) {
         list.add(e);
         int i = list.size() - 1;
 
+        // The while loop maintains the heap by switching the element e with its parent,
+        // making e the new parent, from there is compares the next parent to e and if e is smaller
+        // than the new parent it will be switched again, until e has a parent that is smaller or e is at the root.
         while (i > 1 && list.get(parent(i)).getKey() > list.get(i).getKey()) {
 
-//            swap(list.get(parent(i)).getKey(), i);
+            // swap(list.get(parent(i)).getKey(), i);
             Element temp = list.get(i);
             list.set(i, list.get(parent(i)));
             list.set(parent(i), temp);
