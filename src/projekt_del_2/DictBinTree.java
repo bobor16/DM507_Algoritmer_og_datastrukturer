@@ -16,9 +16,12 @@ public class DictBinTree implements Dict {
     private int left;
     private int right;
     private HashMap map = new HashMap();
+    private Node root;
+    private int key = 0;
 
     public DictBinTree() {
         this.map = new HashMap();
+        root = new Node(key);
     }
 
     public int getLeft(int i) {
@@ -29,6 +32,7 @@ public class DictBinTree implements Dict {
         return right;
     }
 
+    // Everything to the left, to the left everything is in a box to the left.. traaalalala - ft Beyonce
     public int minimum(int x) {
         while (!map.containsKey(null)) {
             x = (int) map.get(getLeft(x));
@@ -36,6 +40,7 @@ public class DictBinTree implements Dict {
         return x;
     }
 
+    // Everything to the right
     public int maximum(int x) {
         while (!map.containsKey(null)) {
             x = (int) map.get(getRight(x));
@@ -45,7 +50,14 @@ public class DictBinTree implements Dict {
 
     @Override
     public void insert(int k) {
+        int root = 0;
+        while (!map.containsKey(null)) {
+            if (k <= minimum(k)) {
+                map.put(k, null);
+            } else {
 
+            }
+        }
     }
 
     @Override
@@ -54,23 +66,9 @@ public class DictBinTree implements Dict {
 
     @Override
     public boolean search(int k) {
-//        int low = 0;
-//        int high = size - 1;
-//
-//        while (high >= low) {
-//            int middle = (low + high) / 2;
-//            if (data[middle] == k) {
-//                return true;
-//            }
-//            if (data[middle] < k) {
-//                low = middle + 1;
-//            }
-//            if (data[middle] > k) {
-//                high = middle - 1;
-//            }
-//        }
-//        return false;
-
+        if (map.containsKey(k)) {
+            return true;
+        }
+        return false;
     }
-
 }
