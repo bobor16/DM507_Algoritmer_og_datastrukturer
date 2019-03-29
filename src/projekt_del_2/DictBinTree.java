@@ -29,12 +29,9 @@ public class DictBinTree implements Dict {
         return right;
     }
 
-    public int treeMin(int x) {
-    }
-
     public int minimum(int x) {
         while (map.containsKey(x)) {
-            x = (int) map.get(getLeft(x));
+            x = (int) map.get(x);
         }
         return x;
     }
