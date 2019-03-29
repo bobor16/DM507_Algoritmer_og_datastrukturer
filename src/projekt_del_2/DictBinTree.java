@@ -30,8 +30,16 @@ public class DictBinTree implements Dict {
     }
 
     public int minimum(int x) {
-        while (map.containsKey(x)) {
-            x = (int) map.get(x);
+        while (map.containsKey(getLeft(x))) {
+            x = (int) map.get(getLeft(x));
+        }
+        return x;
+    }
+
+    public int maximum(int x) {
+        while (map.containsKey(getRight(x))) {
+            x = (int) map.get(getRight(x));
+
         }
         return x;
     }
