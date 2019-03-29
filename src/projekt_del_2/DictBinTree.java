@@ -5,32 +5,38 @@
  */
 package projekt_del_2;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Borgar Bordoy
  */
 public class DictBinTree implements Dict {
 
-    private int size = 0;
-    private int[] data;
     private int left;
     private int right;
+    private HashMap map = new HashMap();
 
     public DictBinTree() {
-        this.data = new int[size];
-
+        this.map = new HashMap();
     }
 
-    public int getLeft(int l) {
+    public int getLeft(int i) {
         return left;
     }
 
-    public int getRight(int r) {
+    public int getRight(int i) {
         return right;
     }
 
     public int treeMin(int x) {
-        
+    }
+
+    public int minimum(int x) {
+        while (map.containsKey(x)) {
+            x = (int) map.get(getLeft(x));
+        }
+        return x;
     }
 
     @Override
@@ -44,22 +50,22 @@ public class DictBinTree implements Dict {
 
     @Override
     public boolean search(int k) {
-        int low = 0;
-        int high = size - 1;
-
-        while (high >= low) {
-            int middle = (low + high) / 2;
-            if (data[middle] == k) {
-                return true;
-            }
-            if (data[middle] < k) {
-                low = middle + 1;
-            }
-            if (data[middle] > k) {
-                high = middle - 1;
-            }
-        }
-        return false;
+//        int low = 0;
+//        int high = size - 1;
+//
+//        while (high >= low) {
+//            int middle = (low + high) / 2;
+//            if (data[middle] == k) {
+//                return true;
+//            }
+//            if (data[middle] < k) {
+//                low = middle + 1;
+//            }
+//            if (data[middle] > k) {
+//                high = middle - 1;
+//            }
+//        }
+//        return false;
 
     }
 
