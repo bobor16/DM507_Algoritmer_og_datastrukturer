@@ -32,22 +32,6 @@ public class DictBinTree implements Dict {
         return right;
     }
 
-    // Everything to the left, to the left everything is in a box to the left.. traaalalala - ft Beyonce
-    public int minimum(int x) {
-        while (!map.containsKey(null)) {
-            x = (int) map.get(getLeft(x));
-        }
-        return x;
-    }
-
-    // Everything to the right
-    public int maximum(int x) {
-        while (!map.containsKey(null)) {
-            x = (int) map.get(getRight(x));
-        }
-        return x;
-    }
-
     @Override
     public void insert(int k) {
         Node x = null;
