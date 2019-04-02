@@ -16,12 +16,12 @@ public class DictBinTree implements Dict {
     private int left;
     private int right;
     private HashMap map = new HashMap();
-    private Node root;
     private int key = 0;
+    private int index = 0;
 
     public DictBinTree() {
         this.map = new HashMap();
-        root = new Node(key);
+        index++;
     }
 
     public int getLeft(int i) {
@@ -50,25 +50,44 @@ public class DictBinTree implements Dict {
 
     @Override
     public void insert(int k) {
-        int root = 0;
-        while (!map.containsKey(null)) {
-            if (k <= minimum(k)) {
-                map.put(k, null);
-            } else {
+        Node x = null;
+        Node y = null;
 
+        while (x != null) {
+            y = x;
+            if (k < x.getKey()) {
+                x = x.getLeft();
+            } else {
+                x = x.getRight();
             }
+            k = y.getKey();
+            if (y == null) {
+                k = x.getKey();
+            } else if (k < y.getKey()) {
+                k = y.getLeft().getKey();
+            } else {
+                k = y.getRight().getKey();
+            }
+
         }
     }
 
     @Override
     public int[] orderedTraversal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public boolean search(int k) {
-        if (map.containsKey(k)) {
+        Node node = null;
+        if (node.getKey() == k) {
             return true;
         }
-        return false;
+        if (k < node.getKey()) {
+            return search(node.getLeft().getKey());
+        } else {
+            return search(node.getRight().getKey());
+        }
     }
 }
