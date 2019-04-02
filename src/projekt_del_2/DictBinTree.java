@@ -13,23 +13,11 @@ import java.util.HashMap;
  */
 public class DictBinTree implements Dict {
 
-    private int left;
-    private int right;
-    private HashMap map = new HashMap();
     private int key = 0;
     private int index = 0;
 
     public DictBinTree() {
-        this.map = new HashMap();
         index++;
-    }
-
-    public int getLeft(int i) {
-        return left;
-    }
-
-    public int getRight(int i) {
-        return right;
     }
 
     @Override
