@@ -23,47 +23,29 @@ public class DictBinTree implements Dict {
 
     @Override
     public void insert(int k) {
+        Node z = new Node(k);
 
-        Node y = null;
+    }
+
+    @Override
+    public int[] orderedTraversal() {
+        Tree x = new Tree();
+        if (x.getRoot() != null) {
+            int[] A = x.
+        }
+    }
+
+    @Override
+    public boolean search(int k) {
         Node x = new Node(k);
-
-        while (x != null) {
-            y = x;
+        while (x != null && k != x.getKey()) {
             if (k < x.getKey()) {
                 x = x.getLeftChild();
             } else {
                 x = x.getRightChild();
             }
-            x.setParent(x);
-            if (y == null) {
-                k = x.getKey();
-            } else if (k < y.getKey()) {
-                k = y.getLeftChild().getKey();
-            } else {
-                k = y.getRightChild().getKey();
-            }
-
         }
-    }
-
-    @Override
-    public int[] orderedTraversal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-    }
-
-    @Override
-    public boolean search(int k) {
-        Node node = null;
-        if (node.getKey() == k) {
-            return true;
-        }
-        if (k < node.getKey()) {
-            return search(node.getLeftChild().getKey());
-        } else {
-            return search(node.getRightChild().getKey());
-
-        }
+        return true;
     }
 }
 
@@ -74,12 +56,14 @@ class Node {
     private Node right;
     private Node parent;
 
-    public Node getParent() {
-        return parent;
-    }
-
     public Node(int key) {
         this.key = key;
+        this.left = null;
+        this.right = null;
+    }
+
+    public Node getParent() {
+        return parent;
     }
 
     public int getKey() {
@@ -114,7 +98,7 @@ class Node {
 
 class Tree {
 
-    Node root;
+    private Node root;
     private int size;
 
     public Node getRoot() {

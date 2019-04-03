@@ -19,7 +19,6 @@ class TestProjectPartII {
         for (int i = 0; i < insertValues.length; i++) {
             d.insert(insertValues[i]);
         }
-
         System.out.println();
         System.out.println("Testing search()");
         String answer;
@@ -106,4 +105,5 @@ class TestProjectPartII {
         System.out.println();
 
     }
+
 }
