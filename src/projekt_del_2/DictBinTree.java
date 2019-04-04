@@ -13,8 +13,12 @@ public class DictBinTree implements Dict {
 
     private Tree tree;
     private Node node;
+    private int[] sorted;
+    private int number;
+    private int counter;
 
     public DictBinTree() {
+        tree = new Tree();
     }
 
     public boolean isEmpty() {
@@ -24,14 +28,24 @@ public class DictBinTree implements Dict {
     @Override
     public void insert(int k) {
         Node z = new Node(k);
+        Node y = null;
+        Node x = tree.getRoot();
 
-    }
-
-    @Override
-    public int[] orderedTraversal() {
-        Tree x = new Tree();
-        if (x.getRoot() != null) {
-            int[] A = x.
+        while (x != null) {
+            y = x;
+            if (z.getKey() < x.getKey()) {
+                x = x.getLeftChild();
+            } else {
+                x = x.getRightChild();
+            }
+        }
+        z.setParent(y);
+        if (y == null) {
+            tree.setRoot(z);
+        } else if (z.getKey() < y.getKey()) {
+            y.setLeft(z);
+        } else {
+            y.setRight(z);
         }
     }
 
@@ -46,6 +60,22 @@ public class DictBinTree implements Dict {
             }
         }
         return true;
+    }
+
+    private void treeWalk(Node n) {
+        if (n != null) {
+            treeWalk(n.getLeftChild());
+            System.out.println(n.getKey());
+            treeWalk(n.getRightChild());
+        }
+    }
+
+    @Override
+    public int[] orderedTraversal() {
+        this.sorted = new int[this.number];
+        counter = 0;
+        treeWalk(tree.getRoot());
+        return sorted;
     }
 }
 
