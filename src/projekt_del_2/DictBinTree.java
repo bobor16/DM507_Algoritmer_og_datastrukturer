@@ -38,7 +38,7 @@ public class DictBinTree implements Dict {
                 x = x.getRightChild();
             }
         }
-        z.setParent(y);
+        //z.setParent(y);
         if (y == null) {
             tree.setRoot(z);
         } else if (z.getKey() < y.getKey()) {
@@ -46,6 +46,7 @@ public class DictBinTree implements Dict {
         } else {
             y.setRight(z);
         }
+        this.number++;
     }
 
     @Override
@@ -59,12 +60,14 @@ public class DictBinTree implements Dict {
             }
         }
         return true;
+        //Only returns true, Needs a check for false.
     }
 
     private void treeWalk(Node n) {
         if (n != null) {
             treeWalk(n.getLeftChild());
             System.out.println(n.getKey());
+            this.sorted[this.counter++] = n.getKey();
             treeWalk(n.getRightChild());
         }
     }
