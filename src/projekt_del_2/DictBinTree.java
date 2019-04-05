@@ -15,6 +15,7 @@ public class DictBinTree implements Dict {
     private Node node;
     private int[] sorted;
     private int number;
+    private int counter;
 
     public DictBinTree() {
         tree = new Tree();
