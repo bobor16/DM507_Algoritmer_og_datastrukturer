@@ -15,7 +15,6 @@ public class DictBinTree implements Dict {
     private Node node;
     private int[] sorted;
     private int number;
-    private int counter;
 
     public DictBinTree() {
         tree = new Tree();
@@ -73,7 +72,6 @@ public class DictBinTree implements Dict {
     @Override
     public int[] orderedTraversal() {
         this.sorted = new int[this.number];
-        counter = 0;
         treeWalk(tree.getRoot());
         return sorted;
     }
