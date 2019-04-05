@@ -61,6 +61,7 @@ public class DictBinTree implements Dict {
             }
         }
         return true;
+        //Only returns true, Needs a check for false.
     }
 
     private void treeWalk(Node n) {
