@@ -1,14 +1,13 @@
 package projekt_del_2;
 
-import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * This class uses DictBinTree methods to sort a list of integers that come from
- * input
+ * @author Borgar Bordoy - bobor16@student.sdu.dk
+ * @author Martin Lykke - mlykk17@student.sdu.dk
+ * @author Rasmus Hansen - raha817@student.sdu.dk
  */
 public class TreesSort {
 
