@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projekt_del_2;
 
 /**
- *
- * @author Borgar Bordoy
+ * @author Borgar Bordoy - bobor16@student.sdu.dk
+ * @author Martin Lykke - mlykk17@student.sdu.dk
+ * @author Rasmus Hansen - raha817@student.sdu.dk
  */
 public class DictBinTree implements Dict {
 
@@ -17,7 +13,6 @@ public class DictBinTree implements Dict {
     private int number;
     private int counter;
 
-   
     /**
      * Constructor for DictBinTree
      */
@@ -25,6 +20,15 @@ public class DictBinTree implements Dict {
         tree = new Tree();
     }
 
+    /**
+     * The initialized node 'y' is given the value null, and the node x is the
+     * root of the tree. While the root is different from null, the integer 'k'
+     * in inserts parameter is the root. If the key input less then the root, it
+     * is placed as the left child, and if it is larger it is placed as the
+     * right child.
+     *
+     * @param k
+     */
     @Override
     public void insert(int k) {
 
@@ -66,13 +70,12 @@ public class DictBinTree implements Dict {
         }
     }
 
-     /*
+    /*
      * Searches the tree to find a value
      * Returns x if k is equal to x key
      * Returns left child if k is smaller than key
      * Otherwise, rightchild is returned
      */
-    
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
             return x;
@@ -83,7 +86,7 @@ public class DictBinTree implements Dict {
             return treeSearch(x.getRightChild(), k);
         }
     }
-    
+
     @Override
     public boolean search(int k) {
         Node x = tree.getRoot();
@@ -98,10 +101,9 @@ class Node {
     private Node left;
     private Node right;
 
-     /**
-      * sets up a node structure
-      * the key parameter is the value of the node
-      */
+    /**
+     * sets up a node structure the key parameter is the value of the node
+     */
     public Node(int key) {
         this.key = key;
         this.left = null;
