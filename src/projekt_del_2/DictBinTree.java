@@ -57,44 +57,28 @@ public class DictBinTree implements Dict {
     private void treeWalk(Node n) {
         if (n != null) {
             treeWalk(n.getLeftChild());
-//            System.out.println(n.getKey());
             this.sorted[this.counter++] = n.getKey();
             treeWalk(n.getRightChild());
         }
     }
 
+    public Node treeSearch(Node x, int k) {
+        if (x == null || k == x.getKey()) {
+            return x;
+        }
+        if (k < x.getKey()) {
+            return treeSearch(x.getLeftChild(), k);
+        } else {
+            return treeSearch(x.getRightChild(), k);
+        }
+    }
+
     @Override
     public boolean search(int k) {
-        Node x = treeSearch(node, k);
-//        System.out.println(" This is what the search() returns: " + x);
-        return x != null;
+        Node x = tree.getRoot();
+        Node z = treeSearch(x, k);
+        return z != null;
     }
-
-    private Node treeSearch(Node x, int k) {
-//        if (x == null || k == x.getKey()) {
-//            System.out.println(" This is what treeSearch() returns: " + x);
-//            return x;
-//        }
-//        if (k < x.getKey()) {
-//            System.out.println("(This is the left child) " + x.getLeftChild() + k);
-//            return treeSearch(x.getLeftChild(), k);
-//        } else {
-//            System.out.println("(This is the right child) " + x.getRightChild() + k);
-//            return treeSearch(x.getRightChild(), k);
-//        }
-        while (x != null && k != x.getKey()) {
-            if (k < x.getKey()) {
-//                x = x.getLeftChild();
-                x.setLeftChild(x);
-            } else {
-//                x = x.getRightChild();
-                x.setRightChild(x);
-            }
-        }
-        System.out.println("(This is what the iterative treeSearch() returns) " + x);
-        return x;
-    }
-
 }
 
 class Node {
