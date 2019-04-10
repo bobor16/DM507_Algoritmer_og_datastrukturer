@@ -27,7 +27,7 @@ public class DictBinTree implements Dict {
      * is placed as the left child, and if it is larger it is placed as the
      * right child.
      *
-     * @param k
+     * @param k     Is the key value being inserted.
      */
     @Override
     public void insert(int k) {
@@ -55,8 +55,9 @@ public class DictBinTree implements Dict {
     }
 
     /**
+     * NEED MORE INFO
      *
-     * @return
+     * @return      Returnes a Sorted array.
      */
     @Override
     public int[] orderedTraversal() {
@@ -65,6 +66,12 @@ public class DictBinTree implements Dict {
         treeWalk(tree.getRoot());
         return sorted;
     }
+
+    /**
+     * treeWalk add all Nodes to the left, then all the nodes to the right into an array, in sorted order.
+     *
+     * @param n     Node    The Node which is being placed into the array
+     */
 
     private void treeWalk(Node n) {
         if (n != null) {
@@ -78,8 +85,8 @@ public class DictBinTree implements Dict {
      * Searches the tree to find a value returns x if k is equal to x key, it returns
      * the left child if k is smaller than key, otherwise, rightChild is returned.
      *
-     * @param x
-     * @param k
+     * @param x     Is the Root Node
+     * @param k     Is the key value being search for.
      */
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
@@ -94,8 +101,8 @@ public class DictBinTree implements Dict {
 
     /**
      *
-     * @param k
-     * @return
+     * @param k     Is the key value being search for.
+     * @return      Returns true or false depending on what value x has.
      */
     @Override
     public boolean search(int k) {
