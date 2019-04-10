@@ -8,6 +8,9 @@ import java.util.Scanner;
  * @author Borgar Bordoy - bobor16@student.sdu.dk
  * @author Martin Lykke - mlykk17@student.sdu.dk
  * @author Rasmus Hansen - raha817@student.sdu.dk
+ * 
+ * This class uses DictBinTree methods to
+ * sort a list of integers that come from input
  */
 public class TreesSort {
 
