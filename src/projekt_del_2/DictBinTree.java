@@ -46,6 +46,11 @@ public class DictBinTree implements Dict {
 //        System.out.println("This is what has been inserted " + k);
     }
 
+<<<<<<< HEAD
+    private void treeWalk(Node n) {
+        if (n != null) {
+            treeWalk(n.getLeftChild());
+=======
     @Override
     public int[] orderedTraversal() {
         this.sorted = new int[this.number];
