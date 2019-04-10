@@ -1,5 +1,6 @@
 package projekt_del_2;
 
+
 /**
  * @author Borgar Bordoy - bobor16@student.sdu.dk
  * @author Martin Lykke - mlykk17@student.sdu.dk
@@ -8,7 +9,6 @@ package projekt_del_2;
 public class DictBinTree implements Dict {
 
     private Tree tree;
-    private Node node;
     private int[] sorted;
     private int number;
     private int counter;
@@ -70,7 +70,7 @@ public class DictBinTree implements Dict {
         }
     }
 
-     /*
+     /**
      * Searches the tree to find a value returns x if k is equal to x key, it returns
      * the left child if k is smaller than key, otherwise, rightChild is returned.
      */
@@ -93,7 +93,7 @@ public class DictBinTree implements Dict {
     }
 }
 
-/*
+/**
 * The Node class holds vital information on how a Node and its children are structured.
 * Each Node has a Key which is the reference to itself, a left child and a right child which also are Nodes.
 * All Nodes are to call the getKey() method to find its value, call the getLeftChild and getRightChild to get their values.
@@ -135,7 +135,9 @@ class Node {
     }
 }
 
-// The Tree class hold the information of the root of the Tree, the Root of the Tree is a Node.
+/**
+* The Tree class hold the information of the root of the Tree, the Root of the Tree is a Node.
+*/
 class Tree {
 
     private Node root;
