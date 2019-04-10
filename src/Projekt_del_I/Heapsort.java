@@ -8,8 +8,9 @@ package Projekt_del_I;
 import java.util.Scanner;
 
 /**
- *
- * @author Borgar Bordoy
+ * @author Borgar Bordoy - bobor16@student.sdu.dk
+ * @author Martin Lykke - mlykk17@student.sdu.dk
+ * @author Rasmus Hansen - raha817@student.sdu.dk
  */
 public class Heapsort {
 

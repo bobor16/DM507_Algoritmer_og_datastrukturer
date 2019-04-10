@@ -54,6 +54,10 @@ public class DictBinTree implements Dict {
         this.number++;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int[] orderedTraversal() {
         this.sorted = new int[this.number];
@@ -70,9 +74,12 @@ public class DictBinTree implements Dict {
         }
     }
 
-     /**
+    /**
      * Searches the tree to find a value returns x if k is equal to x key, it returns
      * the left child if k is smaller than key, otherwise, rightChild is returned.
+     *
+     * @param x
+     * @param k
      */
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
@@ -85,6 +92,11 @@ public class DictBinTree implements Dict {
         }
     }
 
+    /**
+     *
+     * @param k
+     * @return
+     */
     @Override
     public boolean search(int k) {
         Node x = tree.getRoot();
