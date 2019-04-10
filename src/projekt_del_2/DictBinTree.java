@@ -95,8 +95,13 @@ public class DictBinTree implements Dict {
     }
 }
 
+/* The Node class holds vital information on how a Node and its children are structured.
+* Each Node has a Key which is the reference to itself, a left child and a right child which also are Nodes.
+* All Nodes are to call the getKey() method to find its value, call the getLeftChild and getRightChild to get their values.
+* And lastly call the setLeftChild and setRightChild which sets a Nodes child to the new value.
+* */
 class Node {
-
+    
     private int key;
     private Node left;
     private Node right;
@@ -122,10 +127,6 @@ class Node {
         return right;
     }
 
-    public void setKey(int key) {
-        this.key = key;
-    }
-
     public void setLeftChild(Node left) {
         this.left = left;
     }
@@ -135,10 +136,10 @@ class Node {
     }
 }
 
+// The Tree class hold the information of the root of the Tree, the Root of the Tree is a Node.
 class Tree {
 
     private Node root;
-    private int size;
 
     public Node getRoot() {
         return root;
@@ -148,12 +149,5 @@ class Tree {
         this.root = root;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 
 }
