@@ -17,6 +17,10 @@ public class DictBinTree implements Dict {
     private int number;
     private int counter;
 
+   
+    /**
+     * Constructor for DictBinTree
+     */
     public DictBinTree() {
         tree = new Tree();
     }
@@ -62,6 +66,13 @@ public class DictBinTree implements Dict {
         }
     }
 
+     /*
+     * Searches the tree to find a value
+     * Returns x if k is equal to x key
+     * Returns left child if k is smaller than key
+     * Otherwise, rightchild is returned
+     */
+    
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
             return x;
@@ -72,7 +83,7 @@ public class DictBinTree implements Dict {
             return treeSearch(x.getRightChild(), k);
         }
     }
-
+    
     @Override
     public boolean search(int k) {
         Node x = tree.getRoot();
@@ -87,6 +98,10 @@ class Node {
     private Node left;
     private Node right;
 
+     /**
+      * sets up a node structure
+      * the key parameter is the value of the node
+      */
     public Node(int key) {
         this.key = key;
         this.left = null;
