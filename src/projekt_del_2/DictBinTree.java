@@ -70,11 +70,9 @@ public class DictBinTree implements Dict {
         }
     }
 
-    /*
-     * Searches the tree to find a value
-     * Returns x if k is equal to x key
-     * Returns left child if k is smaller than key
-     * Otherwise, rightchild is returned
+     /*
+     * Searches the tree to find a value returns x if k is equal to x key, it returns
+     * the left child if k is smaller than key, otherwise, rightChild is returned.
      */
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
@@ -95,11 +93,12 @@ public class DictBinTree implements Dict {
     }
 }
 
-/* The Node class holds vital information on how a Node and its children are structured.
+/*
+* The Node class holds vital information on how a Node and its children are structured.
 * Each Node has a Key which is the reference to itself, a left child and a right child which also are Nodes.
 * All Nodes are to call the getKey() method to find its value, call the getLeftChild and getRightChild to get their values.
 * And lastly call the setLeftChild and setRightChild which sets a Nodes child to the new value.
-* */
+*/
 class Node {
     
     private int key;
