@@ -23,6 +23,7 @@ public class DictBinTree implements Dict {
 
     @Override
     public void insert(int k) {
+
         Node z = new Node(k);
         Node y = null;
         Node x = tree.getRoot();
