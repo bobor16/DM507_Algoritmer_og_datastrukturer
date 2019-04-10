@@ -21,10 +21,6 @@ public class DictBinTree implements Dict {
         tree = new Tree();
     }
 
-    public boolean isEmpty() {
-        return (this.node == null);
-    }
-
     @Override
     public void insert(int k) {
         Node z = new Node(k);
@@ -39,25 +35,22 @@ public class DictBinTree implements Dict {
                 x = x.getRightChild();
             }
         }
-        //z.setParent(y);
         if (y == null) {
             tree.setRoot(z);
         } else if (z.getKey() < y.getKey()) {
-            y.setLeft(z);
+            y.setLeftChild(z);
         } else {
-            y.setRight(z);
+            y.setRightChild(z);
         }
         this.number++;
+//        System.out.println("This is what has been inserted " + k);
     }
 
+<<<<<<< HEAD
     private void treeWalk(Node n) {
         if (n != null) {
             treeWalk(n.getLeftChild());
-            this.sorted[this.counter++] = n.getKey();
-            treeWalk(n.getRightChild());
-        }
-    }
-
+=======
     @Override
     public int[] orderedTraversal() {
         this.sorted = new int[this.number];
@@ -66,6 +59,49 @@ public class DictBinTree implements Dict {
         return sorted;
     }
 
+    private void treeWalk(Node n) {
+        if (n != null) {
+            treeWalk(n.getLeftChild());
+//            System.out.println(n.getKey());
+>>>>>>> master
+            this.sorted[this.counter++] = n.getKey();
+            treeWalk(n.getRightChild());
+        }
+    }
+
+    @Override
+    public boolean search(int k) {
+        Node x = treeSearch(node, k);
+//        System.out.println(" This is what the search() returns: " + x);
+        return x != null;
+    }
+
+    private Node treeSearch(Node x, int k) {
+//        if (x == null || k == x.getKey()) {
+//            System.out.println(" This is what treeSearch() returns: " + x);
+//            return x;
+//        }
+//        if (k < x.getKey()) {
+//            System.out.println("(This is the left child) " + x.getLeftChild() + k);
+//            return treeSearch(x.getLeftChild(), k);
+//        } else {
+//            System.out.println("(This is the right child) " + x.getRightChild() + k);
+//            return treeSearch(x.getRightChild(), k);
+//        }
+        while (x != null && k != x.getKey()) {
+            if (k < x.getKey()) {
+//                x = x.getLeftChild();
+                x.setLeftChild(x);
+            } else {
+//                x = x.getRightChild();
+                x.setRightChild(x);
+            }
+        }
+        System.out.println("(This is what the iterative treeSearch() returns) " + x);
+        return x;
+    }
+
+<<<<<<< HEAD
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
             return x;
@@ -83,6 +119,8 @@ public class DictBinTree implements Dict {
         Node z = treeSearch(x, k);
         return z != null;
     }
+=======
+>>>>>>> master
 }
 
 class Node {
@@ -90,16 +128,11 @@ class Node {
     private int key;
     private Node left;
     private Node right;
-    private Node parent;
 
     public Node(int key) {
         this.key = key;
         this.left = null;
         this.right = null;
-    }
-
-    public Node getParent() {
-        return parent;
     }
 
     public int getKey() {
@@ -118,18 +151,13 @@ class Node {
         this.key = key;
     }
 
-    public void setLeft(Node left) {
+    public void setLeftChild(Node left) {
         this.left = left;
     }
 
-    public void setRight(Node right) {
+    public void setRightChild(Node right) {
         this.right = right;
     }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
-
 }
 
 class Tree {
