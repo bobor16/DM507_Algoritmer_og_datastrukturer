@@ -21,7 +21,7 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * The initialized node 'y' is given the value null, and the node x is the
+     * The initialized node 'y' is given the value null, and the node 'x' is the
      * root of the tree. While the root is different from null, the integer 'k'
      * in inserts parameter is the root. If the key input less then the root, it
      * is placed as the left child, and if it is larger it is placed as the
