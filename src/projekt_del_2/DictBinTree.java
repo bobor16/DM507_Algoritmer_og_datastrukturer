@@ -50,24 +50,9 @@ public class DictBinTree implements Dict {
         this.number++;
     }
 
-    @Override
-    public boolean search(int k) {
-        Node x = new Node(k);
-        while (x != null && k != x.getKey()) {
-            if (k < x.getKey()) {
-                x = x.getLeftChild();
-            } else {
-                x = x.getRightChild();
-            }
-        }
-        return true;
-        //Only returns true, Needs a check for false.
-    }
-
     private void treeWalk(Node n) {
         if (n != null) {
             treeWalk(n.getLeftChild());
-            System.out.println(n.getKey());
             this.sorted[this.counter++] = n.getKey();
             treeWalk(n.getRightChild());
         }
@@ -79,6 +64,24 @@ public class DictBinTree implements Dict {
         this.counter = 0;
         treeWalk(tree.getRoot());
         return sorted;
+    }
+
+    public Node treeSearch(Node x, int k) {
+        if (x == null || k == x.getKey()) {
+            return x;
+        }
+        if (k < x.getKey()) {
+            return treeSearch(x.getLeftChild(), k);
+        } else {
+            return treeSearch(x.getRightChild(), k);
+        }
+    }
+
+    @Override
+    public boolean search(int k) {
+        Node x = tree.getRoot();
+        Node z = treeSearch(x, k);
+        return z != null;
     }
 }
 
