@@ -1,6 +1,5 @@
 package projekt_del_2;
 
-
 /**
  * @author Borgar Bordoy - bobor16@student.sdu.dk
  * @author Martin Lykke - mlykk17@student.sdu.dk
@@ -27,7 +26,7 @@ public class DictBinTree implements Dict {
      * is placed as the left child, and if it is larger it is placed as the
      * right child.
      *
-     * @param k     is the key value being inserted.
+     * @param k is the key value being inserted.
      */
     @Override
     public void insert(int k) {
@@ -55,9 +54,10 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * NEED MORE INFO
+     * creates a copy of the input from the insert method and sorts it by
+     * calling the treeWalk() method.
      *
-     * @return      returnes a Sorted array.
+     * @return returnes a Sorted array.
      */
     @Override
     public int[] orderedTraversal() {
@@ -68,11 +68,11 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * treeWalk add all Nodes to the left, then all the nodes to the right into an array, in sorted order.
+     * If the node n is different from null, the method recursively sorts the
+     * value either to the left or right.
      *
-     * @param n     Node    is the Node value, which is being placed into the array
+     * @param n Node is the Node value, which is being placed into the array
      */
-
     private void treeWalk(Node n) {
         if (n != null) {
             treeWalk(n.getLeftChild());
@@ -82,15 +82,19 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * treeSearch searches the tree to find a value. Firstly it tests if the root of the tree is null by the if statement x is null,
-     * if so it returns the x value.  In the same if statement treeSearch checks to see if Key k being search for is the x.getKey() value,
-     * if so it retruns the x value. and the Search stops.
-     * But if x is not null or k is not x the treeSearch goes to the next set of if and else statements.
-     * If k is less than x.getLeftChild() then it returns a Recursive call to treeSearch with a new x value and the same k value,
-     * If k greater than x.getLeftChild() is not true it returns a Recursive call to treeSearch with x.getRightChild and the same k value.
+     * treeSearch searches the tree to find a value. Firstly it tests if the
+     * root of the tree is null by the if statement x is null, if so it returns
+     * the x value. In the same if statement treeSearch checks to see if Key k
+     * being search for is the x.getKey() value, if so it retruns the x value.
+     * and the Search stops. But if x is not null or k is not x the treeSearch
+     * goes to the next set of if and else statements. If k is less than
+     * x.getLeftChild() then it returns a Recursive call to treeSearch with a
+     * new x value and the same k value, If k greater than x.getLeftChild() is
+     * not true it returns a Recursive call to treeSearch with x.getRightChild
+     * and the same k value.
      *
-     * @param x     is the Root Node
-     * @param k     is the Key Value being search for.
+     * @param x is the Root Node
+     * @param k is the Key Value being search for.
      */
     public Node treeSearch(Node x, int k) {
         if (x == null || k == x.getKey()) {
@@ -104,11 +108,12 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * The search method creates a copy of the root of the tree by setting Node x = tree.getRoot() and
-     * places the Node x into a new Node with two parameters, x to define the root atn k which is the search  goal.
+     * The search method creates a copy of the root of the tree by setting Node
+     * x = tree.getRoot() and places the Node x into a new Node with two
+     * parameters, x to define the root atn k which is the search goal.
      *
-     * @param k     is the key value being search for.
-     * @return      returns true or false depending on what value x has.
+     * @param k is the key value being search for.
+     * @return returns true or false depending on what value x has.
      */
     @Override
     public boolean search(int k) {
@@ -119,13 +124,15 @@ public class DictBinTree implements Dict {
 }
 
 /**
-* The Node class holds vital information on how a Node and its children are structured.
-* Each Node has a Key which is the reference to itself, a left child and a right child which also are Nodes.
-* All Nodes are to call the getKey() method to find its value, call the getLeftChild and getRightChild to get their values.
-* And lastly call the setLeftChild and setRightChild which sets a Nodes child to the new value.
-*/
+ * The Node class holds vital information on how a Node and its children are
+ * structured. Each Node has a Key which is the reference to itself, a left
+ * child and a right child which also are Nodes. All Nodes are to call the
+ * getKey() method to find its value, call the getLeftChild and getRightChild to
+ * get their values. And lastly call the setLeftChild and setRightChild which
+ * sets a Nodes child to the new value.
+ */
 class Node {
-    
+
     private int key;
     private Node left;
     private Node right;
@@ -161,8 +168,9 @@ class Node {
 }
 
 /**
-* The Tree class hold the information of the root of the Tree, the Root of the Tree is a Node.
-*/
+ * The Tree class hold the information of the root of the Tree, the Root of the
+ * Tree is a Node.
+ */
 class Tree {
 
     private Node root;
@@ -174,6 +182,5 @@ class Tree {
     public void setRoot(Node root) {
         this.root = root;
     }
-
 
 }
