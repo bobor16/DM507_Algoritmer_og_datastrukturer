@@ -86,8 +86,8 @@ public class DictBinTree implements Dict {
      * if so it returns the x value.  In the same if statement treeSearch checks to see if Key k being search for is the x.getKey() value,
      * if so it retruns the x value. and the Search stops.
      * But if x is not null or k is not x the treeSearch goes to the next set of if and else statements.
-     * If k is < than x.getLeftChild() then it returns a Recursive call to treeSearch with a new x value and the same k value,
-     * If k < x.getLeftChild() is not true it returns a Recursive call to treeSearch with x.getRightChild and the same k value.
+     * If k is less than x.getLeftChild() then it returns a Recursive call to treeSearch with a new x value and the same k value,
+     * If k greater than x.getLeftChild() is not true it returns a Recursive call to treeSearch with x.getRightChild and the same k value.
      *
      * @param x     is the Root Node
      * @param k     is the Key Value being search for.
