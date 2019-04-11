@@ -54,10 +54,10 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * creates a copy of the input from the insert method and sorts it by
+     * Creates a copy of the input from the insert method and sorts it by
      * calling the treeWalk() method.
      *
-     * @return returnes a Sorted array.
+     * @return returns a Sorted array.
      */
     @Override
     public int[] orderedTraversal() {
@@ -85,7 +85,7 @@ public class DictBinTree implements Dict {
      * treeSearch searches the tree to find a value. Firstly it tests if the
      * root of the tree is null by the if statement x is null, if so it returns
      * the x value. In the same if statement treeSearch checks to see if Key k
-     * being search for is the x.getKey() value, if so it retruns the x value.
+     * being search for is the x.getKey() value, if so it returns the x value.
      * and the Search stops. But if x is not null or k is not x the treeSearch
      * goes to the next set of if and else statements. If k is less than
      * x.getLeftChild() then it returns a Recursive call to treeSearch with a
