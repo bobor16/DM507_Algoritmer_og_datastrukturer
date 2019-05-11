@@ -2,6 +2,7 @@ package projekt_del_3;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import projekt_del_3.BitInputStream;
 
 // Test program to exercise BitInputStream and BitOutputStream. Run it
 // on some small text file (containing at least 4 bytes) by
