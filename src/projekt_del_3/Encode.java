@@ -15,6 +15,6 @@ import java.util.Scanner;
 public class Encode {
 
     Scanner input = new Scanner(System.in);
-    private int[] intArray = new int[257];
+    private int[] intArray = new int[255];
 
 }
