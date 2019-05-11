@@ -43,3 +43,17 @@ public class Encode {
     }
 
 }
+
+
+// Huffman(C) peseudocode på side 431
+/**
+ * n = |C|
+ * Q = C
+ * for i = 1 to n -1
+ *      allocate a new node z
+ *      z.left = x = EXTRACT-Min(Q)
+ *      z.right = y = EXTRACT-Min(Q)
+ *      z.freg = x.freq + y.freg
+ *      INSERT(Q, z)
+ * return EXTRACT-Min(Q)    // return the root of the tree
+ **/
