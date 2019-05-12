@@ -27,6 +27,7 @@ public class Encode {
     private static HashMap<Integer, Integer> map = new HashMap<>();
     private static int s = (list.size() / 2);
     private static PQ P = new PQHeap(s);
+    public static int n;
 
     public static void main(String[] args) throws Exception {
 
@@ -73,7 +74,23 @@ public class Encode {
         bitOutput.writeBit(0);
         bitOutput.writeBit(1);
     }
-
+    
+    public static void huffmanMethod() {
+        
+       // n = |C| 
+      //  * Q = C 
+        
+        for (int i = 0; i < n-1; i++) {
+            Element[] elementZ = new Element[2];
+            elementZ[0] = P.extractMin();
+            elementZ[1] = P.extractMin();
+            int freg = elementZ[0].getKey() + elementZ[1].getKey();
+            
+           // P.insert(new Element()); Need parameter for the element
+    }
+      //  P.extractMin() This needs to return the root of the tree
+    }
+    
     public static void extract() {
         Element e;
         Element el;
