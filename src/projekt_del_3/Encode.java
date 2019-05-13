@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 public class Encode {
 
     private static List<Integer> list = new ArrayList<>();
+    private static List<Integer> freq = new ArrayList<>();
     private static HashMap<Integer, Integer> map = new HashMap<>();
     private static int s = (list.size() / 2);
     private static PQ P = new PQHeap(s);
@@ -31,8 +32,11 @@ public class Encode {
 
     public static void main(String[] args) throws Exception {
 
-        String file = "C:/Users/borga/Desktop/textFile.txt";
-        String file2 = "C:/Users/borga/Desktop/textFile2.txt";
+        //String file = "C:/Users/borga/Desktop/textFile.txt";
+        //String file2 = "C:/Users/borga/Desktop/textFile2.txt";
+        String file = "C:\\Users\\rasmu\\OneDrive\\SDU\\4. Semester\\DM507 - Algoritmer og Datastrukturer\\Projects\\textFile.txt";
+        String file2 = "C:\\Users\\rasmu\\OneDrive\\SDU\\4. Semester\\DM507 - Algoritmer og Datastrukturer\\Projects\\textFile2.txt";
+
 
         int[] integer = new int[255];
 
