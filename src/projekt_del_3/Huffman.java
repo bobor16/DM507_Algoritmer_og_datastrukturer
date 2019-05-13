@@ -5,11 +5,13 @@
  */
 package projekt_del_3;
 
-import java.io.File;
+import Projekt_del_I.Element;
+import Projekt_del_I.PQ;
+import Projekt_del_I.PQHeap;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import projekt_del_2.Node;
 
 /**
  *
@@ -17,24 +19,44 @@ import java.util.Scanner;
  */
 public class Huffman {
 
-    static FileInputStream fin1 = null;
+    private int[] n = new int[255];
+    private PQ queue = new PQHeap(255);
+    private Node y;
+    private Node x;
 
-    public static void countChars(InputStream in) throws IOException {
-        int count = 0;
+    public Element encode() throws Exception {
+        String fileName = "C:/Users/borga/Desktop/textFile.txt";
+        String fileName2 = "C:/Users/borga/Desktop/textFile2.txt";
+        FileInputStream fis = new FileInputStream(fileName);
+        FileOutputStream fos = new FileOutputStream(fileName2);
 
-        while (in.read() != -1) {
-            count++;
+//        BitInputStream bis = new BitInputStream(fis);
+//        BitOutputStream bos = new BitOutputStream(fos);
+
+//        int bint = bis.readInt();
+        int fint = fis.read();
+
+        for (int k = 0; fint < n.length; k++) {
+            n[k] = fis.read();
         }
 
-        System.out.println("Counted " + count + " chars.");
+        for (int i = 0; i < n.length; i++) {
+            Node z = new Node(i);
+            x = (Node) queue.extractMin().getData();
+            y = (Node) queue.extractMin().getData();
+            z.setLeftChild(x);
+            z.setRightChild(y);
+            z.setFreq(x.getFreq() + y.getFreq());
+
+            queue.insert((Element) queue);
+            System.out.println(queue);
+        }
+
+        return queue.extractMin();
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length < 1) {
-            System.out.println("No file was given as an argument..!");
-            System.exit(1);
-        }
-        String fileName = args[0];
-        fin1 = new FileInputStream(fileName);
+        Huffman h = new Huffman();
+        h.encode();
     }
 }

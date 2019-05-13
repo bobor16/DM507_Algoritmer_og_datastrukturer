@@ -34,6 +34,8 @@ public class Encode {
         String file = "C:/Users/borga/Desktop/textFile.txt";
         String file2 = "C:/Users/borga/Desktop/textFile2.txt";
 
+        int[] integer = new int[255];
+
         FileInputStream inputStream = new FileInputStream(file);
         FileOutputStream outputStream = new FileOutputStream(file2);
 
@@ -41,9 +43,13 @@ public class Encode {
         BitOutputStream bitOutput = new BitOutputStream(outputStream);
 
         int i = bitInput.readInt();
-        System.out.println(i);
+        int x = inputStream.read();
+        System.out.println(x);
+        
         bitOutput.writeInt(i);
-
+//        for (int x = 0; x < integer.length; x++) {
+//            integer[i] = bitInput.readInt();
+//        }
         Iterator<Integer> iterator = list.iterator();
         while (iterator.hasNext()) {
             P.insert(new Element(iterator.next(), iterator.next()));
@@ -74,23 +80,22 @@ public class Encode {
         bitOutput.writeBit(0);
         bitOutput.writeBit(1);
     }
-    
-    public static void huffmanMethod() {
-        
-       // n = |C| 
-      //  * Q = C 
-        
-        for (int i = 0; i < n-1; i++) {
-            Element[] elementZ = new Element[2];
-            elementZ[0] = P.extractMin();
-            elementZ[1] = P.extractMin();
-            int freg = elementZ[0].getKey() + elementZ[1].getKey();
-            
-           // P.insert(new Element()); Need parameter for the element
-    }
-      //  P.extractMin() This needs to return the root of the tree
-    }
-    
+
+//    public static void huffmanMethod() {
+//
+//        // n = |C| 
+//        //  * Q = C 
+//        for (int i = 0; i < n - 1; i++) {
+//            Element[] elementZ = new Element[2];
+//            elementZ[0] = P.extractMin();
+//            elementZ[1] = P.extractMin();
+//            int freg = elementZ[0].getKey() + elementZ[1].getKey();
+//
+//            // P.insert(new Element()); Need parameter for the element
+//        }
+//        //  P.extractMin() This needs to return the root of the tree
+//    }
+
     public static void extract() {
         Element e;
         Element el;
@@ -105,17 +110,3 @@ public class Encode {
     }
 
 }
-
-
-// Huffman(C) peseudocode på side 431
-/**
- * n = |C|
- * Q = C
- * for i = 1 to n -1
- *      allocate a new node z
- *      z.left = x = EXTRACT-Min(Q)
- *      z.right = y = EXTRACT-Min(Q)
- *      z.freg = x.freq + y.freg
- *      INSERT(Q, z)
- * return EXTRACT-Min(Q)    // return the root of the tree
- **/
