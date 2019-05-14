@@ -20,9 +20,11 @@ public class Counter {
                 System.out.println("Error reading from file");
             else {
                 for (int i = 32; i < ASCII; i++)
-                    System.out.println("ASCII code: " + i + " ,character: " + (char) i
-                            + " ,frequency: "
-                            + frequency[i]);
+                    if (frequency[i] > 0) {
+                        System.out.println("ASCII code: " + i + " ,character: " + (char) i
+                                + " ,frequency: "
+                                + frequency[i]);
+                    }
 
                 System.out.println("\nTotal characters in URL: " + sumTotal(frequency));
             }
