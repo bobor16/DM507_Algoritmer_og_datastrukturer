@@ -27,7 +27,7 @@ public class Encode {
     public static void main(String[] args) throws Exception {
         Encode encode = new Encode();
         try {
-            int[] frequency = encode.createTable("C:/Users/borga/Desktop/textFile.txt");
+            int[] frequency = createTable("src/textFile.txt");
 
             if (frequency.length == 0) {
                 System.out.println("Error reading from file");
