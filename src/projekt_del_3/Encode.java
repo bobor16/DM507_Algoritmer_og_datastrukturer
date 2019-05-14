@@ -9,13 +9,14 @@ import Projekt_del_I.Element;
 import Projekt_del_I.PQ;
 import Projekt_del_I.PQHeap;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import projekt_del_2.Node;
+//import static projekt_del_3.Counter.ASCII;
 
 /**
  *
@@ -23,94 +24,85 @@ import java.util.Map.Entry;
  */
 public class Encode {
 
-    private static List<Integer> list = new ArrayList<>();
-    private static List<Integer> freq = new ArrayList<>();
-    private static HashMap<Integer, Integer> map = new HashMap<>();
-    private static int s = (list.size() / 2);
-    private static PQ P = new PQHeap(s);
     public static int n;
+    public static final int ASCII = 256;
+//    private int[] nn = new int[255];
+    private PQ queue = new PQHeap(255);
+    private Node y;
+    private Node x;
 
     public static void main(String[] args) throws Exception {
+        try {
+            int[] frequency = createTable("C:/Users/borga/Desktop/textFile.txt");
 
-        //String file = "C:/Users/borga/Desktop/textFile.txt";
-        //String file2 = "C:/Users/borga/Desktop/textFile2.txt";
-        String file = "C:\\Users\\rasmu\\OneDrive\\SDU\\4. Semester\\DM507 - Algoritmer og Datastrukturer\\Projects\\textFile.txt";
-        String file2 = "C:\\Users\\rasmu\\OneDrive\\SDU\\4. Semester\\DM507 - Algoritmer og Datastrukturer\\Projects\\textFile2.txt";
-
-
-        int[] integer = new int[255];
-
-        FileInputStream inputStream = new FileInputStream(file);
-        FileOutputStream outputStream = new FileOutputStream(file2);
-
-        BitInputStream bitInput = new BitInputStream(inputStream);
-        BitOutputStream bitOutput = new BitOutputStream(outputStream);
-
-        int i = bitInput.readInt();
-        int x = inputStream.read();
-        System.out.println(x);
-        
-        bitOutput.writeInt(i);
-//        for (int x = 0; x < integer.length; x++) {
-//            integer[i] = bitInput.readInt();
-//        }
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            P.insert(new Element(iterator.next(), iterator.next()));
-        }
-        extract();
-
-        int bit;
-
-        while ((bit = bitInput.readBit()) != -1) {
-            System.out.println(bit);
-            if (map.get(bit) != null) {
-                map.put(bit, map.get(bit) + 1);
+            if (frequency.length == 0) {
+                System.out.println("Error reading from file");
             } else {
-                map.put(bit, 1);
+                for (int i = 32; i < ASCII; i++) {
+                    if (frequency[i] > 0) {
+                        System.out.println("ASCII code: " + i + " character: " + (char) i
+                                + " frequency: "
+                                + frequency[i]);
+                    }
+                }
+
+                System.out.println("\nTotal characters in URL: " + sumTotal(frequency));
             }
-            bitOutput.writeBit(bit);
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        bitInput.close();
-        bitOutput.close();
 
-        for (Entry<Integer, Integer> e : map.entrySet()) {
-            list.add(e.getValue());
-            list.add(e.getKey());
-        }
-        System.out.println(map);
-        System.out.println(list);
-
-        bitOutput.writeBit(0);
-        bitOutput.writeBit(1);
     }
 
-//    public static void huffmanMethod() {
-//
-//        // n = |C| 
-//        //  * Q = C 
-//        for (int i = 0; i < n - 1; i++) {
-//            Element[] elementZ = new Element[2];
-//            elementZ[0] = P.extractMin();
-//            elementZ[1] = P.extractMin();
-//            int freg = elementZ[0].getKey() + elementZ[1].getKey();
-//
-//            // P.insert(new Element()); Need parameter for the element
+    public static int[] createTable(String fileName) throws FileNotFoundException, IOException {
+
+        int[] frequency = new int[ASCII];
+        int i = 0;
+        int ch;
+
+        FileInputStream fileInput = new FileInputStream(fileName);
+        while ((i = fileInput.read()) != -1) {
+            ch = (char) i;
+            if (ch >= 0 && ch < frequency.length) {
+                frequency[ch]++;
+            }
+        }
+        return frequency;
+    }
+
+    private static int sumTotal(int[] array) {
+        int total = 0;
+        for (int x : array) {
+            total += x;
+        }
+        return total;
+    }
+
+//    public Element huffman() {
+//        String fileName = "C:/Users/borga/Desktop/textFile.txt";
+//        String fileName2 = "C:/Users/borga/Desktop/textFile2.txt";
+//        FileInputStream fis = new FileInputStream(fileName);
+//        FileOutputStream fos = new FileOutputStream(fileName2);
+//        BitInputStream bis = new BitInputStream(fis);
+//        BitOutputStream bos = new BitOutputStream(fos);
+//        int bint = bis.readInt();
+//        int fint = fis.read();
+//        for (int k = 0; fint < n.length; k++) {
+//            nn[k] = fis.read();
 //        }
-//        //  P.extractMin() This needs to return the root of the tree
+//
+//        for (int i = 0; i < n.length; i++) {
+//            Node z = new Node(i);
+//            x = (Node) queue.extractMin().getData();
+//            y = (Node) queue.extractMin().getData();
+//            z.setLeftChild(x);
+//            z.setRightChild(y);
+//            z.setFreq(x.getFreq() + y.getFreq());
+//
+//            queue.insert((Element) queue);
+//            System.out.println(queue);
+//        }
+//
+//        return queue.extractMin();
 //    }
-
-    public static void extract() {
-        Element e;
-        Element el;
-
-        for (int i = 0; i <= (s - 1); i++) {
-            e = P.extractMin();
-            el = P.extractMin();
-
-            Element element = new Element(e.getKey() + el.getKey(), null);
-            P.insert(element);
-        }
-    }
-
 }

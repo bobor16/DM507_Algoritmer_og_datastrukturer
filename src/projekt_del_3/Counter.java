@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
-
+import java.io.FileInputStream;
 
 public class Counter {
 
@@ -13,18 +13,18 @@ public class Counter {
 
     public static void main(String[] args) {
         try {
-            int[] frequency = createTable("C:\\Users\\rasmu\\OneDrive\\SDU\\4. Semester\\DM507 - Algoritmer og Datastrukturer\\Projects\\textFile.txt");
+            int[] frequency = createTable("C:/Users/borga/Desktop/textFile.txt");
 
-
-            if (frequency.length == 0)
+            if (frequency.length == 0) {
                 System.out.println("Error reading from file");
-            else {
-                for (int i = 32; i < ASCII; i++)
+            } else {
+                for (int i = 32; i < ASCII; i++) {
                     if (frequency[i] > 0) {
-                        System.out.println("ASCII code: " + i + " ,character: " + (char) i
-                                + " ,frequency: "
+                        System.out.println("ASCII code: " + i + " character: " + (char) i
+                                + " frequency: "
                                 + frequency[i]);
                     }
+                }
 
                 System.out.println("\nTotal characters in URL: " + sumTotal(frequency));
             }
@@ -42,18 +42,18 @@ public class Counter {
     }
 
     public static int[] createTable(String fileName) throws FileNotFoundException, IOException {
+
         int[] frequency = new int[ASCII];
-        File f = new File(fileName);
-        try (FileReader r = new FileReader(f)) {
-            while (r.ready()) {
-                int ch = r.read();
-                if (ch >= 0 && ch < frequency.length)
-                    frequency[ch]++;
-                else
-                    System.out.println("Not ASCII: " + ch + " " + (char) ch);
+        int i = 0;
+        int ch;
+
+        FileInputStream fileInput = new FileInputStream(fileName);
+        while ((i = fileInput.read()) != -1) {
+            ch = (char) i;
+            if (ch >= 0 && ch < frequency.length) {
+                frequency[ch]++;
             }
         }
         return frequency;
-
     }
 }
