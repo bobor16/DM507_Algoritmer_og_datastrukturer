@@ -10,13 +10,8 @@ import Projekt_del_I.PQ;
 import Projekt_del_I.PQHeap;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import projekt_del_2.Node;
-//import static projekt_del_3.Counter.ASCII;
 
 /**
  *
@@ -24,16 +19,15 @@ import projekt_del_2.Node;
  */
 public class Encode {
 
-    public static int n;
     public static final int ASCII = 256;
-//    private int[] nn = new int[255];
-    private PQ queue = new PQHeap(255);
+//    private PQ queue;
     private Node y;
     private Node x;
 
     public static void main(String[] args) throws Exception {
+        Encode encode = new Encode();
         try {
-            int[] frequency = createTable("C:/Users/borga/Desktop/textFile.txt");
+            int[] frequency = encode.createTable("C:/Users/borga/Desktop/textFile.txt");
 
             if (frequency.length == 0) {
                 System.out.println("Error reading from file");
@@ -46,7 +40,9 @@ public class Encode {
                     }
                 }
 
-                System.out.println("\nTotal characters in URL: " + sumTotal(frequency));
+                System.out.println("\nTotal characters in URL: " + encode.sum(frequency));
+
+                encode.huffman(frequency);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -54,7 +50,7 @@ public class Encode {
 
     }
 
-    public static int[] createTable(String fileName) throws FileNotFoundException, IOException {
+    public int[] createTable(String fileName) throws FileNotFoundException, IOException {
 
         int[] frequency = new int[ASCII];
         int i = 0;
@@ -70,39 +66,31 @@ public class Encode {
         return frequency;
     }
 
-    private static int sumTotal(int[] array) {
+    private int sum(int[] i) {
         int total = 0;
-        for (int x : array) {
+        for (int x : i) {
             total += x;
         }
         return total;
     }
 
-//    public Element huffman() {
-//        String fileName = "C:/Users/borga/Desktop/textFile.txt";
-//        String fileName2 = "C:/Users/borga/Desktop/textFile2.txt";
-//        FileInputStream fis = new FileInputStream(fileName);
-//        FileOutputStream fos = new FileOutputStream(fileName2);
-//        BitInputStream bis = new BitInputStream(fis);
-//        BitOutputStream bos = new BitOutputStream(fos);
-//        int bint = bis.readInt();
-//        int fint = fis.read();
-//        for (int k = 0; fint < n.length; k++) {
-//            nn[k] = fis.read();
-//        }
-//
-//        for (int i = 0; i < n.length; i++) {
-//            Node z = new Node(i);
-//            x = (Node) queue.extractMin().getData();
-//            y = (Node) queue.extractMin().getData();
-//            z.setLeftChild(x);
-//            z.setRightChild(y);
-//            z.setFreq(x.getFreq() + y.getFreq());
-//
-//            queue.insert((Element) queue);
-//            System.out.println(queue);
-//        }
-//
-//        return queue.extractMin();
-//    }
+    public Element huffman(int[] C) {
+        PQ Q = new PQHeap(C.length);
+        for (int i = 1; i < C.length - 1; i++) {
+//            if (C[i] > 0) {
+            Node z = new Node(i);
+            x = (Node) Q.extractMin().getData();
+            y = (Node) Q.extractMin().getData();
+            z.setLeftChild(x);
+            z.setRightChild(y);
+            z.setFreq(x.getFreq() + y.getFreq());
+            Q.insert((Element) Q);
+//            } else {
+//                System.out.println("fuck");
+//            }
+        }
+        return Q.extractMin();
+
+    }
+
 }
