@@ -12,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import projekt_del_2.Node;
 
 /**
@@ -61,6 +60,9 @@ public class Encode {
                 }
             }
 
+            b.writeBit(0);
+            b.writeBit(1);
+
             f.close();
             b.close();
         }
@@ -71,31 +73,17 @@ public class Encode {
         int[] frequency = new int[ASCII];
         int i = 0;
         int ch;
-        String outFilePath = "src/textFile2.txt";
 
         FileInputStream fileInput = new FileInputStream(fileName);
-//        FileOutputStream outFile = new FileOutputStream(outFilePath);
 
-//        BitInputStream bitInput = new BitInputStream(fileInput);
-//        BitOutputStream bitOutput = new BitOutputStream(outFile);
-//
-//        int x = fileInput.read();
-//        bitOutput.writeInt(x);
-//        System.out.println(x);
         while ((i = fileInput.read()) != -1) {
             ch = (char) i;
-//            System.out.println(i);
-//            bitOutput.writeInt(i);
-
             if (ch >= 0 && ch < frequency.length) {
                 frequency[ch]++;
             }
         }
+        fileInput.close();
 
-//        bitOutput.writeBit(0);
-//        bitOutput.writeBit(1);
-//        bitInput.close();
-//        bitOutput.close();
         return frequency;
     }
 
