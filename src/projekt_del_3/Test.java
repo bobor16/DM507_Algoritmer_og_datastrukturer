@@ -19,8 +19,8 @@ public class Test {
     public static void main(String[] args) throws Exception {
 
         // Open input and output byte streams to/from files.
-        FileInputStream inFile = new FileInputStream("C:\\Users\\borga\\Documents\\NetBeansProjects\\DM507_Algoritmer_og_datastrukturer\\src\\textFile.txt");
-        FileOutputStream outFile = new FileOutputStream("C:\\Users\\borga\\Documents\\NetBeansProjects\\DM507_Algoritmer_og_datastrukturer\\src\\textFile2.txt");
+        FileInputStream inFile = new FileInputStream(args[0]);
+        FileOutputStream outFile = new FileOutputStream(args[1]);
 
         // Wrap the new bit streams around the input/output streams.
         BitInputStream in = new BitInputStream(inFile);

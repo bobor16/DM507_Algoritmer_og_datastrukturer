@@ -26,7 +26,7 @@ public class Encode {
     public static final int ASCII = 256;
     private String[] codes = new String[ASCII];
 //    private PQ queue;
-    private String outFilePath = "C:\\Users\\borga\\Documents\\NetBeansProjects\\DM507_Algoritmer_og_datastrukturer\\src\\textFile2.txt";
+    private String outFilePath = "src/textFile2.txt";
 
     public static void main(String[] args) throws Exception {
         Encode encode = new Encode();
@@ -58,26 +58,48 @@ public class Encode {
         int[] frequency = new int[ASCII];
         int i = 0;
         int ch;
-
+//        File file = new File(fileName);
         FileInputStream fileInput = new FileInputStream(fileName);
         FileOutputStream outFile = new FileOutputStream(outFilePath);
-        BitInputStream bitInput = new BitInputStream(fileInput);
 
+        BitInputStream bitInput = new BitInputStream(fileInput);
         BitOutputStream bitOutput = new BitOutputStream(outFile);
 
-//        int x = fileInput.read();
+        int x = bitInput.readInt();
+        System.out.println(x);
+        bitOutput.writeInt(x);
+
         while ((i = bitInput.readBit()) != -1) {
             ch = (char) i;
-//            System.out.println(ch);
-            Integer integerObject = bitInput.readBit();
-            byte b = integerObject.byteValue();
-            bitOutput.writeBit(b);
-            System.out.println(b);
+            bitOutput.writeBit(i);
+            System.out.println(i);
+//            Integer integerObject = bitInput.readBit();
+//            byte b = integerObject.byteValue();
+
             if (ch >= 0 && ch < frequency.length) {
                 frequency[ch]++;
             }
         }
+        bitOutput.writeBit(0);
+        bitOutput.writeBit(1);
+
+        bitInput.close();
+        bitOutput.close();
+
         return frequency;
+    }
+
+    public byte[] readFileToByteArray(File file) {
+        FileInputStream fileInput = null;
+        byte[] bArray = new byte[(int) file.length()];
+        try {
+            fileInput = new FileInputStream(file);
+            fileInput.read();
+            fileInput.close();
+        } catch (IOException ioExp) {
+            ioExp.printStackTrace();
+        }
+        return bArray;
     }
 
     private int sum(int[] i) {
