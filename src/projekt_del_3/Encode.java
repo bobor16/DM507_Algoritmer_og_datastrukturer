@@ -50,10 +50,13 @@ public class Encode {
             FileOutputStream fo = new FileOutputStream(output);
             BitOutputStream b = new BitOutputStream(fo);
 
+            for (int i : frequency) {
+                b.writeInt(i);
+            }
+
             int i;
             while ((i = f.read()) != -1) {
                 for (char c : codes[i].toCharArray()) {
-                    b.writeInt(Integer.parseInt(codes[i]));
                     b.writeBit(Character.getNumericValue(c));
                 }
             }
