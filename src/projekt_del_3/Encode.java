@@ -22,49 +22,36 @@ public class Encode {
 
     public static final int ASCII = 256;
     private static String[] codes = new String[ASCII];
-    private static String input = "src/textFile.txt";
-    private static String output = "src/textFile2.txt";
+    private static String fileInputPath;
+    private static String fileOutputPath;
 
     public static void main(String[] args) throws Exception {
+        fileInputPath = args[0];
+        fileOutputPath = args[1];
         Encode encode = new Encode();
-        int[] frequency = encode.createTable(input);
+        int[] frequency = encode.createTable(fileInputPath);
+        Element e = encode.huffman(frequency);
+        encode.makeCode((Node) e.getData(), "");
+        FileInputStream f = new FileInputStream(fileInputPath);
+        FileOutputStream fo = new FileOutputStream(fileOutputPath);
+        BitOutputStream b = new BitOutputStream(fo);
 
-        if (frequency.length == 0) {
-            System.out.println("Error reading from file");
-        } else {
-            for (int i = 32; i < ASCII; i++) {
-                if (frequency[i] > 0) {
-                    System.out.println("ASCII code: " + i + " character: " + (char) i
-                            + " frequency: "
-                            + frequency[i]);
-                }
-            }
-            System.out.println("\nTotal characters in URL: " + encode.sum(frequency));
-
-            Element e = encode.huffman(frequency);
-            encode.makeCode((Node) e.getData(), "");
-
-            FileInputStream f = new FileInputStream(input);
-            FileOutputStream fo = new FileOutputStream(output);
-            BitOutputStream b = new BitOutputStream(fo);
-
-            for (int i : frequency) {
-                b.writeInt(i);
-            }
-
-            int i;
-            while ((i = f.read()) != -1) {
-                for (char c : codes[i].toCharArray()) {
-                    b.writeBit(Character.getNumericValue(c));
-                }
-            }
-
-            b.writeBit(0);
-            b.writeBit(1);
-
-            f.close();
-            b.close();
+        for (int i : frequency) {
+            b.writeInt(i);
         }
+
+        int i;
+        while ((i = f.read()) != -1) {
+            for (char c : codes[i].toCharArray()) {
+                b.writeBit(Character.getNumericValue(c));
+            }
+        }
+
+        b.writeBit(0);
+        b.writeBit(1);
+
+        f.close();
+        b.close();
     }
 
     public int[] createTable(String fileName) throws FileNotFoundException, IOException {
@@ -82,15 +69,6 @@ public class Encode {
         fileInput.close();
 
         return frequency;
-    }
-
-    private int sum(int[] i) {
-        int total = 0;
-
-        for (int x : i) {
-            total += x;
-        }
-        return total;
     }
 
     public String[] makeCode(Node root, String s) {
@@ -127,7 +105,5 @@ public class Encode {
             Q.insert(new Element(z.getFreq(), z));
         }
         return Q.extractMin();
-
     }
-
 }
