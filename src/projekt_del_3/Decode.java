@@ -1,6 +1,7 @@
 package projekt_del_3;
 
 import Projekt_del_I.Element;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,13 +15,9 @@ public class Decode {
 
     public static void main(String[] args) throws IOException {
         Encode e = new Encode();
-
+        Decode d = new Decode();
         FileInputStream in = new FileInputStream(file);
-        FileOutputStream out = new FileOutputStream(file);
-//
         BitInputStream bin = new BitInputStream(in);
-        BitOutputStream bout = new BitOutputStream(out);
-
         int[] iArray = new int[ASCII];
 
         for (int i = 0; i < iArray.length - 1; i++) {
@@ -36,17 +33,38 @@ public class Decode {
         }
 
         Element element = e.huffman(iArray);
-        e.makeCode((Node) element.getData(), "");
+        d.decodeTree((Node) element.getData());
+
+//       
+    }
+
+    public void decodeTree(Node root) throws IOException {
+        FileInputStream fin = new FileInputStream(file);
+        FileOutputStream fout = new FileOutputStream(new File("C:\\Users\\borga\\Documents\\NetBeansProjects\\DM507_Algoritmer_og_datastrukturer\\src\\textFile3.txt"));
+        BitInputStream bin = new BitInputStream(fin);
+        BitOutputStream bout = new BitOutputStream(fout);
 
         int j = bin.readInt();
+        bout.writeInt(j);
 
-        int bit;
-        while ((bit = bin.readBit()) != -1) {
-            bout.writeBit(bit);
-
+        int i;
+        Node n = root;
+        while ((i = bin.readBit()) != -1) {
+            if (i == 0) {
+                n = n.getLeftChild();
+            }
+            if (i == 1) {
+                n = n.getRightChild();
+            }
+            if (n.getLeftChild() == null && n.getRightChild() == null) {
+                bout.writeInt(n.getKey());
+                n = root;
+            }
         }
+        bout.writeBit(0);
+        bout.writeBit(1);
 
-        in.close();
         bin.close();
+        bout.close();
     }
 }

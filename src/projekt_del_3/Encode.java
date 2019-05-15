@@ -22,7 +22,6 @@ public class Encode {
 
     public static final int ASCII = 256;
     private static String[] codes = new String[ASCII];
-//    private PQ queue;
     private static String input = "src/textFile.txt";
     private static String output = "src/textFile2.txt";
 
@@ -69,11 +68,9 @@ public class Encode {
     }
 
     public int[] createTable(String fileName) throws FileNotFoundException, IOException {
-
         int[] frequency = new int[ASCII];
         int i = 0;
         int ch;
-
         FileInputStream fileInput = new FileInputStream(fileName);
 
         while ((i = fileInput.read()) != -1) {
@@ -89,6 +86,7 @@ public class Encode {
 
     private int sum(int[] i) {
         int total = 0;
+
         for (int x : i) {
             total += x;
         }
@@ -100,12 +98,9 @@ public class Encode {
 
         if (root.getRightChild() != null) {
             makeCode(root.getRightChild(), code + "1");
-//            System.out.println("right: " + s);
         }
         if (root.getLeftChild() != null) {
             makeCode(root.getLeftChild(), code + "0");
-//            System.out.println("left: " + s);
-
         } else {
             this.codes[root.getKey()] = code;
         }
@@ -113,7 +108,6 @@ public class Encode {
     }
 
     public Element huffman(int[] C) {
-
         PQ Q = new PQHeap(C.length);
         for (int o = 0; o < C.length - 1; o++) {
             Node s = new Node(o);
