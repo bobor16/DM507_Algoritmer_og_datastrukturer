@@ -8,13 +8,11 @@ package projekt_del_3;
 import Projekt_del_I.Element;
 import Projekt_del_I.PQ;
 import Projekt_del_I.PQHeap;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import projekt_del_2.DictBinTree;
+import java.io.UnsupportedEncodingException;
 import projekt_del_2.Node;
 
 /**
@@ -24,14 +22,14 @@ import projekt_del_2.Node;
 public class Encode {
 
     public static final int ASCII = 256;
-    private String[] codes = new String[ASCII];
+    private static String[] codes = new String[ASCII];
 //    private PQ queue;
-    private String outFilePath = "src/textFile2.txt";
+    private static String input = "src/textFile.txt";
+    private static String output = "src/textFile2.txt";
 
     public static void main(String[] args) throws Exception {
         Encode encode = new Encode();
-
-        int[] frequency = encode.createTable("src/textFile.txt");
+        int[] frequency = encode.createTable(input);
 
         if (frequency.length == 0) {
             System.out.println("Error reading from file");
@@ -43,13 +41,25 @@ public class Encode {
                             + frequency[i]);
                 }
             }
-
             System.out.println("\nTotal characters in URL: " + encode.sum(frequency));
 
             Element e = encode.huffman(frequency);
-
             encode.makeCode((Node) e.getData(), "");
-            System.out.println("");
+
+            FileInputStream f = new FileInputStream(input);
+            FileOutputStream fo = new FileOutputStream(output);
+            BitOutputStream b = new BitOutputStream(fo);
+
+            int i;
+            while ((i = f.read()) != -1) {
+                for (char c : codes[i].toCharArray()) {
+                    b.writeInt(Integer.parseInt(codes[i]));
+                    b.writeBit(Character.getNumericValue(c));
+                }
+            }
+
+            f.close();
+            b.close();
         }
     }
 
@@ -58,48 +68,32 @@ public class Encode {
         int[] frequency = new int[ASCII];
         int i = 0;
         int ch;
-//        File file = new File(fileName);
+        String outFilePath = "src/textFile2.txt";
+
         FileInputStream fileInput = new FileInputStream(fileName);
-        FileOutputStream outFile = new FileOutputStream(outFilePath);
+//        FileOutputStream outFile = new FileOutputStream(outFilePath);
 
-        BitInputStream bitInput = new BitInputStream(fileInput);
-        BitOutputStream bitOutput = new BitOutputStream(outFile);
-
-        int x = bitInput.readInt();
-        System.out.println(x);
-        bitOutput.writeInt(x);
-
-        while ((i = bitInput.readBit()) != -1) {
+//        BitInputStream bitInput = new BitInputStream(fileInput);
+//        BitOutputStream bitOutput = new BitOutputStream(outFile);
+//
+//        int x = fileInput.read();
+//        bitOutput.writeInt(x);
+//        System.out.println(x);
+        while ((i = fileInput.read()) != -1) {
             ch = (char) i;
-            bitOutput.writeBit(i);
-            System.out.println(i);
-//            Integer integerObject = bitInput.readBit();
-//            byte b = integerObject.byteValue();
+//            System.out.println(i);
+//            bitOutput.writeInt(i);
 
             if (ch >= 0 && ch < frequency.length) {
                 frequency[ch]++;
             }
         }
-        bitOutput.writeBit(0);
-        bitOutput.writeBit(1);
 
-        bitInput.close();
-        bitOutput.close();
-
+//        bitOutput.writeBit(0);
+//        bitOutput.writeBit(1);
+//        bitInput.close();
+//        bitOutput.close();
         return frequency;
-    }
-
-    public byte[] readFileToByteArray(File file) {
-        FileInputStream fileInput = null;
-        byte[] bArray = new byte[(int) file.length()];
-        try {
-            fileInput = new FileInputStream(file);
-            fileInput.read();
-            fileInput.close();
-        } catch (IOException ioExp) {
-            ioExp.printStackTrace();
-        }
-        return bArray;
     }
 
     private int sum(int[] i) {
@@ -115,9 +109,11 @@ public class Encode {
 
         if (root.getRightChild() != null) {
             makeCode(root.getRightChild(), code + "1");
+//            System.out.println("right: " + s);
         }
         if (root.getLeftChild() != null) {
             makeCode(root.getLeftChild(), code + "0");
+//            System.out.println("left: " + s);
 
         } else {
             this.codes[root.getKey()] = code;
