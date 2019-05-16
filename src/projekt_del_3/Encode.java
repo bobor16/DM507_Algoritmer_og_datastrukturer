@@ -15,9 +15,11 @@ import java.io.IOException;
 import projekt_del_2.Node;
 
 /**
- *
- * @author Borgar Bordoy
+ * @author Borgar Bordoy - bobor16@student.sdu.dk
+ * @author Martin Lykke - mlykk17@student.sdu.dk
+ * @author Rasmus Hansen - raha817@student.sdu.dk
  */
+
 public class Encode {
 
     public static final int ASCII = 256;
