@@ -47,9 +47,8 @@ public class Encode {
             }
         }
 
-        b.writeBit(0);
-        b.writeBit(1);
-
+//        b.writeBit(0);
+//        b.writeBit(1);
         f.close();
         b.close();
     }

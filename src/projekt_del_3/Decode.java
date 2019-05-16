@@ -8,39 +8,41 @@ import java.io.IOException;
 import projekt_del_2.Node;
 
 public class Decode {
+
     private static String filePath;
     private static String newFilePath;
     private static final int ASCII = 256;
-    private final String[] codes = new String[ASCII];
+//    private final String[] codes = new String[ASCII];
 
     public static void main(String[] args) throws IOException {
         filePath = args[0];
         newFilePath = args[1];
         Encode e = new Encode();
         Decode d = new Decode();
-        FileInputStream in = new FileInputStream(args[0]);
+        FileInputStream in = new FileInputStream(filePath);
         BitInputStream bin = new BitInputStream(in);
-        int[] iArray = new int[ASCII];
-
-        for (int i = 0;
-                i < iArray.length - 1; i++) {
-            iArray[i] = bin.readInt();
-        }
-
-        Element element = e.huffman(iArray);
-        d.decodeTree((Node) element.getData());
+        d.decodeTree();
     }
 
-    public void decodeTree(Node root) throws IOException {
+    public void decodeTree() throws IOException {
         FileInputStream fin = new FileInputStream(filePath);
         FileOutputStream fout = new FileOutputStream(new File(newFilePath));
         BitInputStream bin = new BitInputStream(fin);
         BitOutputStream bout = new BitOutputStream(fout);
+        int[] iArray = new int[ASCII];
+        Encode e = new Encode();
 
-        int j = bin.readInt();
-        bout.writeInt(j);
+        for (int i = 0; i < iArray.length; i++) {
+            iArray[i] = bin.readInt();
+        }
+
+        Element element = e.huffman(iArray);
+
+//        int j = bin.readInt();
+//        bout.writeInt(j);
         int i;
-        Node n = root;
+        Node roots = (Node) element.getData();
+        Node n = roots;
 
         while ((i = bin.readBit()) != -1) {
             if (i == 0) {
@@ -51,14 +53,11 @@ public class Decode {
             }
             if (n.getLeftChild() == null && n.getRightChild() == null) {
                 bout.writeInt(n.getKey());
-                n = root;
+                n = roots;
             }
         }
 
-        bout.writeBit(0);
-        bout.writeBit(1);
-
-        bin.close();
-        bout.close();
+//        bout.writeBit(0);
+//        bout.writeBit(1);
     }
 }
