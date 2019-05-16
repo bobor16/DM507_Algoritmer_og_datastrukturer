@@ -18,6 +18,16 @@ public class Decode {
     private static String newFilePath;
     private static final int ASCII = 256;
 
+    /*
+    There is a fault somewhere in the code, which, depending
+    on the length of the input, writes a faulty decoded input. 
+    
+    Input and output have been assigned to the arguments of the mainmethod
+    depending on which to execute first.
+    The filepath has been sat in the "set project configuration".
+    
+    Lastly, calls the decode method
+     */
     public static void main(String[] args) throws IOException {
         filePath = args[0];
         newFilePath = args[1];
@@ -26,7 +36,8 @@ public class Decode {
     }
 
     /**
-     * @throws IOException
+     * Takes the inputfile and wraps it in the bitinputstream and runs a forloop
+     * on the length of the iArray.
      */
     public void decodeTree() throws IOException {
         FileInputStream fin = new FileInputStream(filePath);
@@ -74,6 +85,7 @@ public class Decode {
             }
         }
 
+        //Closes the input and output stream
         bin.close();
         bout.close();
     }

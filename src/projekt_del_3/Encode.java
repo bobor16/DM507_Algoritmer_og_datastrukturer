@@ -31,7 +31,7 @@ public class Encode {
      to call methods through the object.
      Creates an int array which is set equal
      to the results of createTable(input)
-     which takes a file as inputt
+     which takes a file as input
      */
     public static void main(String[] args) throws Exception {
         fileInputPath = args[0];
@@ -40,23 +40,27 @@ public class Encode {
         int[] frequency = encode.createTable(fileInputPath);
         Element e = encode.huffman(frequency);
         encode.makeCode((Node) e.getData(), "");
-        FileInputStream f = new FileInputStream(fileInputPath);
-        FileOutputStream fo = new FileOutputStream(fileOutputPath);
-        BitOutputStream b = new BitOutputStream(fo);
+        FileInputStream fin = new FileInputStream(fileInputPath);
+        FileOutputStream fout = new FileOutputStream(fileOutputPath);
+        BitOutputStream bout = new BitOutputStream(fout);
 
         for (int i : frequency) {
-            b.writeInt(i);
+            bout.writeInt(i);
         }
-        // Writes frequencies of bits to output
+        /*
+        Writes frequencies of bits to output while iterating through the 
+        fileinputstream, if it reaches -1 it will close.
+         */
         int i;
-        while ((i = f.read()) != -1) {
+        while ((i = fin.read()) != -1) {
             for (char c : codes[i].toCharArray()) {
-                b.writeBit(Character.getNumericValue(c));
+                bout.writeBit(Character.getNumericValue(c));
             }
         }
 
-        f.close();
-        b.close();
+        //Closes the input and output stream.
+        fin.close();
+        bout.close();
     }
 
     /*
@@ -70,17 +74,23 @@ public class Encode {
      frequency array, which is returned
      */
     public int[] createTable(String fileName) throws FileNotFoundException, IOException {
+        //assigns the frequency array to 256
         int[] frequency = new int[ASCII];
         int i = 0;
         int ch;
         FileInputStream fileInput = new FileInputStream(fileName);
 
+        /*
+        Iterates through file while reading input, if it reaches
+        -1 it will stop.
+         */
         while ((i = fileInput.read()) != -1) {
             ch = (char) i;
             if (ch >= 0 && ch < frequency.length) {
                 frequency[ch]++;
             }
         }
+        //Closes the input stream.
         fileInput.close();
 
         return frequency;
@@ -91,7 +101,7 @@ public class Encode {
      and assigns the values 1 or 0
      depending on whether right or left 
      child is null
-     If 
+     lastly it sets the key to its code.
      */
     public String[] makeCode(Node root, String s) {
         String code = s;
@@ -115,13 +125,24 @@ public class Encode {
     and puts them in nodes
      */
     public Element huffman(int[] C) {
+        //Creates the priority queue
         PQ Q = new PQHeap(C.length);
-        for (int o = 0; o < C.length - 1; o++) {
-            Node s = new Node(o);
-            s.setFreq(C[o]);
+
+        /*
+        Iterates through the methods argument, and sets a integer to the frequncy
+        inserts a element for each frequency index.
+         */
+        for (int n = 0; n < C.length - 1; n++) {
+            Node s = new Node(n);
+            s.setFreq(C[n]);
             Q.insert(new Element(s.getFreq(), s));
         }
-
+        /*
+        Iterates same list as described above
+        creates the left and right whilst setting the frequency for each time
+        element has been found.
+        insets the frequency into the element with the node.
+         */
         for (int i = 1; i < C.length - 1; i++) {
             Node x;
             Node y;
